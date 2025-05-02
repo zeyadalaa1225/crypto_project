@@ -16,11 +16,7 @@ class DiffieHellman:
             self.generator = self._find_primitive_root(self.prime)
     
     def _generate_large_prime(self, bits):
-        """
-        Generate a large prime number
-        :param bits: Bit length of the prime
-        :return: Large prime number
-        """
+
         while True:
             p = random.getrandbits(bits)
             p |= (1 << bits - 1) | 1  # Set high bit and ensure odd
@@ -45,11 +41,7 @@ class DiffieHellman:
         return -1
     
     def _factorize(self, n):
-        """
-        Simple factorization for small numbers (for finding primitive roots)
-        :param n: Number to factorize
-        :return: Set of prime factors
-        """
+
         factors = set()
         while n % 2 == 0:
             factors.add(2)
@@ -68,9 +60,7 @@ class DiffieHellman:
         return factors
     
     def generate_keys(self):
-        """
-        Generate private and public keys
-        """
+
         # Private key should be in range [2, p-2]
         self.private_key = random.randint(2, self.prime - 2)
         self.public_key = pow(self.generator, self.private_key, self.prime)
@@ -80,10 +70,7 @@ class DiffieHellman:
         return self.public_key
     
     def compute_shared_secret(self, other_public_key):
-        """
-        Compute shared secret using other party's public key
-        :param other_public_key: Other party's public key
-        """
+
         # Compute shared secret
         self.shared_secret = pow(other_public_key, self.private_key, self.prime)
         
